@@ -1,11 +1,14 @@
-export function increment() {
+export function setTodods(todos) {
   return {
-    type: 'INCREMENT'
+    type: 'SET_TODOS',
+    payload: todos,
   };
 }
 
-export function decrement() {
-  return {
-    type: 'DECREMENT'
-  };
+export function getTotdos(dispatch, state) {
+  fetch('https://jsonplaceholder.typicode.com/todos').then(todos => {
+    todos.json().then(data => {
+      dispatch(setTodods(data));
+    });
+  });
 }

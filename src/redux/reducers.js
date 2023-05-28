@@ -1,13 +1,14 @@
 const initialState = {
-  count: 0,
+  todos: [],
+  isLoading: false,
 };
 
 export function reducer(state=initialState, action) {
   switch (action.type) {
-    case 'INCREMENT':
-      return { ...state, count: state.count + 1};
-    case 'DECREMENT':
-      return { ...state, count: state.count - 1};
+    case 'SET_TODOS':
+      return { ...state, todos: action.payload };
+    case 'SET_LOADING':
+      return { ...state, isLoading: action.payload };
     default:
       return state;
   }

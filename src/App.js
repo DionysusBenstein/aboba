@@ -1,18 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement } from "./redux/actions";
+import { getTotdos } from "./redux/actions";
+import { useEffect } from "react";
+import Counter1 from "./Counter1";
 
 function App() {
   const dispatch = useDispatch();
-  const count = useSelector(state => state.count);
+  const { todos } = useSelector(state => state);
 
-  const handleInc = () => dispatch(increment());
-  const handleDec = () => dispatch(decrement());
+  useEffect(() => {
+    dispatch(getTotdos);
+  });
 
   return (
     <div className="App">
-      <div>Counter: {count}</div>
-      <button onClick={handleInc}>+1</button>
-      <button onClick={handleDec}>-1</button>
+      <ul className="list">
+        {todos.map(todo => <li key={todo.id}>{todo.id}</li>)}
+      </ul>
+      <Counter1/>
     </div>
   );
 }
